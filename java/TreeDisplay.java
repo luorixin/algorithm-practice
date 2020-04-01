@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Queue;
 
 public class TreeDisplay{
 	private TreeNode root;
@@ -84,6 +85,31 @@ public class TreeDisplay{
 		return result;
 	}
 
+	// 层序遍历
+	public List<Integer> TopToBottomDisplay(){
+		List<Integer> result = new ArrayList<>();
+		Queue<TreeNode> queue = new LinkedList<>();
+		if (root == null){
+			return result;
+		}
+		queue.offer(root);
+		while(!queue.isEmpty()){
+			TreeNode tmp = queue.poll();
+			result.add(tmp.value);
+			if (tmp.left != null){
+				queue.offer(tmp.left);
+			}
+			if (tmp.right != null){
+				queue.offer(tmp.right);
+			}
+		}
+		System.out.println("\n层序遍历：");
+		for(Integer r : result){
+			System.out.print(r+" ");
+		}
+		return result;
+	}
+
 	public TreeNode makeTree(Integer[] arr, int index){
 		TreeNode tn = null;
         if (index < arr.length) {
@@ -119,5 +145,6 @@ public class TreeDisplay{
 		treeDisplay.DLRDisplay();
 		treeDisplay.LDRDisplay();
 		treeDisplay.LRDDisplay();
+		treeDisplay.TopToBottomDisplay();
 	}
 }
